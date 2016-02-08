@@ -1,0 +1,27 @@
+{
+  "name": "burnstream",
+  "version": "0.1.0",
+  "description": "Use burned bitcoins to produce a stream of weighted binary messages",
+  "main": "index.js",
+  "dependencies": {
+    "burnie": "^0.1.0",
+    "debug": "^2.2.0",
+    "minimist": "^1.2.0",
+    "stream-to-array": "^2.2.1",
+    "through2": "^2.0.1",
+    "webcoin": "^1.0.2"
+  },
+  "devDependencies": {
+    "standard": "^6.0.4"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "keywords": [
+    "bitcoin",
+    "spv",
+    "burn"
+  ],
+  "author": "Paul Kernfeld",
+  "license": "ISC"
+}

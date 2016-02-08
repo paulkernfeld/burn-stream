@@ -1,0 +1,17 @@
+{
+    "networkName": "testnet",
+    "burnAddress": "mvBurnStreamDemoXXXXXXXXXXXXX2cyY3",
+    "opReturnPrefix": "6275726e7a",
+    "checkpoint": {
+        "height": 684000,
+        "header": {
+            "version": 4,
+            "prevHash": "00000000002723e85e208769005e949c742418a5af1193a4ae26c4ba75b1620d",
+            "merkleRoot": "7d75693f4fc54073063495346b45776fef661e277348c7c983e6533c8a7fefbb",
+            "time": 1454790697,
+            "bits": 437649469,
+            "nonce": 2694680811
+        }
+    }
+}
+
