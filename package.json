@@ -1,10 +1,10 @@
 {
-  "name": "burnstream",
+  "name": "burn-stream",
   "version": "0.1.0",
   "description": "Use burned bitcoins to produce a stream of weighted binary messages",
   "main": "index.js",
   "dependencies": {
-    "burnie": "^0.1.0",
+    "burnie": "^0.2.0",
     "debug": "^2.2.0",
     "minimist": "^1.2.0",
     "stream-to-array": "^2.2.1",
@@ -23,5 +23,13 @@
     "burn"
   ],
   "author": "Paul Kernfeld",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulkernfeld/burn-stream.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paulkernfeld/burn-stream/issues"
+  },
+  "homepage": "https://github.com/paulkernfeld/burn-stream#readme"
 }
