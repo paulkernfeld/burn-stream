@@ -1,6 +1,6 @@
-burn-stream uses burned bitcoins to produce a stream of weighted binary messages.
+burn-stream is a world-writable append-only log using burned bitcoins.
 
-A burn stream is a series of special Bitcoin transactions that can be efficiently retrieved by any client, including a [simplified payment verification](https://en.bitcoin.it/wiki/Thin_Client_Security) client. Burn streams should be usable in many different applications.
+A burn stream is a series of special Bitcoin transactions that can be efficiently retrieved by any client, including a [simplified payment verification](https://en.bitcoin.it/wiki/Thin_Client_Security) client. Burn streams should be usable in many different applications. Anyone can write to a burn stream. Each message in a burn stream has a weight that quantifies how much money the writer burned in order to perform the write.
 
 This library presents a "burn stream" as a Javascript object stream. Here's an example message that says, "okay" with a weight of 100,000 satoshis.
 
@@ -15,6 +15,9 @@ This library presents a "burn stream" as a Javascript object stream. Here's an e
 
 Getting started
 ---------------
+### Installing
+You may have trouble building [node-webrtc](http://js-platform.github.io/node-webrtc/) on your system. The [github issues](https://github.com/js-platform/node-webrtc/issues) may be of help.
+
 ### Reading
 Here's a simple example that will log out messages from the demo burn stream on the Bitcoin testnet. See `example.js` for a more verbose version of this script.
 
@@ -63,7 +66,7 @@ Tips:
 
 The burn-stream protocol
 ------------------------
-The burn-stream protocol is a simple way of storing data in the Bitcoin blockchain. It emphasizes ease of implementation and compatibility with SPV clients.
+The burn-stream protocol is a simple way of storing data in the Bitcoin blockchain. It emphasizes ease of implementation and compatibility with SPV clients. Anyone can write or read from any burn stream.
 
 ### Burn stream
 A burn stream is a sequence of special transactions in the Bitcoin blockchain, intended for a particular purpose. Each burn stream has two identifiers:

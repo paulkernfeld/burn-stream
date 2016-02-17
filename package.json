@@ -1,7 +1,7 @@
 {
   "name": "burn-stream",
   "version": "0.1.0",
-  "description": "Use burned bitcoins to produce a stream of weighted binary messages",
+  "description": "A world-writable append-only log using burned bitcoins",
   "main": "index.js",
   "dependencies": {
     "burnie": "^0.2.0",
