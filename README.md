@@ -25,7 +25,7 @@ var Node = require('webcoin').Node
 var fs = require('fs')
 var constants = require('webcoin').constants
 
-// Load the config from a JSON file
+// Load the app config from a JSON file
 var config = JSON.parse(fs.readFileSync('example-config.json'))
 
 // Set the node's checkpoint
@@ -49,29 +49,10 @@ node.start()
 Note that burn-stream does *not* guarantee that the data will be delivered in chronological order.
 
 ### Writing
-The `create_tx.js` script can be used to write data to a burn stream. Currently this process requires low-level access to a Bitcoin wallet.
-
-1. Get a list of unspent transaction outputs from your Bitcoin client, in a [bitcore-friendly format](https://bitcore.io/api/lib/unspent-output).
-2. Pipe these UTXOs into `create_tx.js`, specifying:
-  * a hex-encoded message to write
-  * the amount to burn, in Satoshis
-  * the location of the config file
-  * the address to send change to
-  * (optionally) the fee, in Satoshis
-3. Take the raw transaction from the script, sign it, and broadcast it.
-
-The example below writes the word "hello" with 0.1 mBTC (10,000 satoshis).
-
-```
-cat utxos.json | node create_tx.js \
-    --message=68656c6c6f \
-    --amount=10000 \
-    --config=config.json \
-    --changeAddress=mgWrLnoWjjYrmX1YTUcxHR9AKQbeGRe7zC
-```
+See [burn-stream-writer](https://github.com/paulkernfeld/burn-stream-writer).
 
 ### Creating a burn stream
-You may want to create a new burn stream for your application. In this case, you'll need to create a config file. For a working example, see `example-config.json`.
+You may want to create a new burn stream for your application. In this case, you'll need to create an app config file. For a working example, see `example-config.json`.
 
 Tips:
 
