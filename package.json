@@ -6,8 +6,6 @@
   "dependencies": {
     "burnie": "^0.2.0",
     "debug": "^2.2.0",
-    "minimist": "^1.2.0",
-    "stream-to-array": "^2.2.1",
     "through2": "^2.0.1",
     "webcoin": "^1.0.2"
   },
