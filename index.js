@@ -2,7 +2,7 @@ var Burnie = require('burnie')
 var Address = require('bitcore-lib').Address
 var utils = require('webcoin').utils
 var BlockHeader = require('bitcore-lib').BlockHeader
-var debug = require('debug')('burnstream')
+var debug = require('debug')('burn-stream')
 var through2 = require('through2')
 var assert = require('assert')
 
