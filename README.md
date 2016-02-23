@@ -16,7 +16,7 @@ This library presents a "burn stream" as a Javascript object stream. Here's an e
 Getting started
 ---------------
 ### Installing
-You may have trouble building [node-webrtc](http://js-platform.github.io/node-webrtc/) on your system. The [github issues](https://github.com/js-platform/node-webrtc/issues) may be of help.
+Run `npm install burn-stream webcoin`, since you also need webcoin.
 
 ### Reading
 Here's a simple example that will log out messages from the demo burn stream on the Bitcoin testnet. See `example.js` for a more verbose version of this script.
