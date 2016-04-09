@@ -3,14 +3,14 @@
     "burnAddress": "mvBurnStreamDemoXXXXXXXXXXXXX2cyY3",
     "opReturnPrefix": "6275726e7a",
     "checkpoint": {
-        "height": 684000,
+        "height": 683424,
         "header": {
             "version": 4,
-            "prevHash": "00000000002723e85e208769005e949c742418a5af1193a4ae26c4ba75b1620d",
-            "merkleRoot": "7d75693f4fc54073063495346b45776fef661e277348c7c983e6533c8a7fefbb",
-            "time": 1454790697,
+            "prevHash": "000000000000218ff87fd50cfba2fd04203a78d2600cb2c4dcb039d803426e19",
+            "merkleRoot": "d84d019ab47950ba9ccaa4051bfa4210a571cfe02fc471a1879dc08ac16f4558",
+            "time": 1454561749,
             "bits": 437649469,
-            "nonce": 2694680811
+            "nonce": 388317301
         }
     }
 }
