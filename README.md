@@ -2,7 +2,7 @@ burn-stream is a world-writable append-only log using burned bitcoins.
 
 A burn stream is a series of special Bitcoin transactions that can be efficiently retrieved by any client, including a [simplified payment verification](https://en.bitcoin.it/wiki/Thin_Client_Security) client. Burn streams should be usable in many different applications. Anyone can write to a burn stream. Each message in a burn stream has a weight that quantifies how much money the writer burned in order to perform the write.
 
-This library presents a "burn stream" as a Javascript object stream. Here's an example message that says, "okay" with a weight of 100,000 satoshis.
+This library presents a burn stream as a Javascript object stream. Here's an example message that this library might produce. It says, "okay" with a weight of 100,000 satoshis.
 
 ```
 {
@@ -13,41 +13,15 @@ This library presents a "burn stream" as a Javascript object stream. Here's an e
 }
 ```
 
+This library is based on burnie and webcoin.
+
 Getting started
 ---------------
 ### Installing
-Run `npm install burn-stream webcoin`, since you also need webcoin.
+Run `npm install burn-stream`.
 
 ### Reading
-Here's a simple example that will log out messages from the demo burn stream on the Bitcoin testnet. See `example.js` for a more verbose version of this script.
-
-```
-var BurnStream = require('burn-stream')
-var Networks = require('bitcore-lib').Networks
-var Node = require('webcoin').Node
-var fs = require('fs')
-var constants = require('webcoin').constants
-
-// Load the app config from a JSON file
-var config = JSON.parse(fs.readFileSync('example-config.json'))
-
-// Set the node's checkpoint
-constants.checkpoints[config.networkName] = BurnStream.checkpointToConstant(config.checkpoint)
-
-// We need to pass in a node
-var node = new Node({
-  network: Networks[config.networkName],
-  path: 'testdata',
-  acceptWeb: true
-})
-config.node = node
-
-// Log data out when we get it
-var bs = BurnStream(config)
-bs.stream.on('data', console.log)
-
-node.start()
-```
+See `example.js`.
 
 Note that burn-stream does *not* guarantee that the data will be delivered in chronological order.
 
