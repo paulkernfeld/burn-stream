@@ -8,14 +8,16 @@
     "bitcoin-net": "^3.1.0",
     "bitcoin-util": "^2.0.1",
     "blockchain-spv": "^1.3.4",
-    "burnie": "^0.3.0",
+    "burnie": "^0.4.0",
     "debug": "^2.2.0",
-    "levelup": "^1.3.1",
+    "level-sublevel": "^6.5.4",
     "through2": "^2.0.1",
     "webcoin-bitcoin-testnet": "^0.1.0"
   },
   "devDependencies": {
     "brfs": "^1.4.3",
+    "leveldown": "^1.4.6",
+    "levelup": "^1.3.1",
     "standard": "^6.0.4"
   },
   "scripts": {

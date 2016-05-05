@@ -7,8 +7,7 @@ var Blockchain = require('blockchain-spv')
 var Filter = require('bitcoin-filter')
 var utils = require('bitcoin-util')
 var params = require('webcoin-bitcoin-testnet')
-var levelup = require('levelup')
-var memdown = require('memdown')
+var sublevel = require('level-sublevel')
 var network = require('bitcoinjs-lib').networks.testnet
 var script = require('bitcoinjs-lib').script
 
@@ -24,12 +23,14 @@ function BurnStream (opts) {
   if (!(this instanceof BurnStream)) return new BurnStream(opts)
 
   var self = this
+  var config = opts.config
 
-  debug(opts)
-  assert(opts.networkName = 'testnet')
-  var opReturnPrefix = Buffer(opts.opReturnPrefix, 'hex')
+  debug('new', config)
 
-  params.blockchain.checkpoints = [ checkpointFromObject(opts.checkpoint) ]
+  assert(config.networkName = 'testnet')
+  var opReturnPrefix = Buffer(config.opReturnPrefix, 'hex')
+
+  params.blockchain.checkpoints = [ checkpointFromObject(config.checkpoint) ]
 
   // We need to pass in a PeerGroup
   this.peers = new PeerGroup(params.net)
@@ -37,16 +38,17 @@ function BurnStream (opts) {
 
   var filter = new Filter(this.peers, { falsePositiveRate: 0.00001 })
 
-  var db = levelup('chain', { db: memdown })
-  var chain = new Blockchain(params.blockchain, db)
+  var db = sublevel(opts.db)
+  var chain = new Blockchain(params.blockchain, db.sublevel('chain'))
   chain.on('error', console.log)
 
   this.burnie = Burnie({
-    address: opts.burnAddress,
-    from: opts.checkpoint.height + 1,
+    address: config.burnAddress,
+    from: config.checkpoint.height + 1,
     peers: this.peers,
     chain: chain,
-    network: network
+    network: network,
+    db: db.sublevel('burnie')
   })
   filter.add(this.burnie)
 
@@ -73,7 +75,7 @@ function BurnStream (opts) {
     if (opReturnOutputs.length) {
       assert.equal(opReturnOutputs.length, 1, 'i have not yet implemented multiple outputs, sorry')
       var out = opReturnOutputs[0]
-      assert.equal(out.output.value.toNumber(), 0, 'i have not implemented satoshis per op return')
+      assert.equal(out.output.value, 0, 'i have not implemented satoshis per op return')
       this.push({
         message: out.data.slice(opReturnPrefix.length),
         output: out.output,
