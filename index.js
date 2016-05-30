@@ -10,6 +10,8 @@ var params = require('webcoin-bitcoin-testnet')
 var sublevel = require('level-sublevel')
 var network = require('bitcoinjs-lib').networks.testnet
 var script = require('bitcoinjs-lib').script
+var inherits = require('inherits')
+var EventEmitter = require('events')
 
 function decodeOpReturnOutput (outScript) {
   var decompiled = script.decompile(outScript)
@@ -19,8 +21,16 @@ function decodeOpReturnOutput (outScript) {
   return decompiled[1]
 }
 
+var bubbleError = function (from, to, name) {
+  from.on('error', function (err) {
+    console.log('error:', name)
+    to.emit('error', err)
+  })
+}
+
 function BurnStream (opts) {
   if (!(this instanceof BurnStream)) return new BurnStream(opts)
+  EventEmitter.call(this)
 
   var self = this
   var config = opts.config
@@ -34,13 +44,11 @@ function BurnStream (opts) {
 
   // We need to pass in a PeerGroup
   this.peers = new PeerGroup(params.net)
-  this.peers.on('error', console.log)
 
   var filter = new Filter(this.peers, { falsePositiveRate: 0.00001 })
 
   var db = sublevel(opts.db)
   var chain = new Blockchain(params.blockchain, db.sublevel('chain'))
-  chain.on('error', console.log)
 
   this.burnie = Burnie({
     address: config.burnAddress,
@@ -94,7 +102,12 @@ function BurnStream (opts) {
       self.peers.createHeaderStream({ locator: locator }).pipe(chain.createWriteStream())
     })
   })
+
+  bubbleError(self.peers, self, 'peers')
+  bubbleError(chain, self, 'chain')
+  bubbleError(self.stream, self, 'stream')
 }
+inherits(BurnStream, EventEmitter)
 
 BurnStream.prototype.start = function () {
   this.peers.connect()
