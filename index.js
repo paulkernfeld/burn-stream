@@ -7,7 +7,7 @@ var Blockchain = require('blockchain-spv')
 var Filter = require('bitcoin-filter')
 var utils = require('bitcoin-util')
 var params = require('webcoin-bitcoin-testnet')
-var sublevel = require('level-sublevel')
+var sublevel = require('subleveldown')
 var network = require('bitcoinjs-lib').networks.testnet
 var script = require('bitcoinjs-lib').script
 var inherits = require('inherits')
@@ -47,8 +47,7 @@ function BurnStream (opts) {
 
   var filter = new Filter(this.peers, { falsePositiveRate: 0.00001 })
 
-  var db = sublevel(opts.db)
-  var chain = new Blockchain(params.blockchain, db.sublevel('chain'))
+  var chain = new Blockchain(params.blockchain, sublevel(opts.db, 'chain'))
 
   this.burnie = Burnie({
     address: config.burnAddress,
@@ -56,7 +55,7 @@ function BurnStream (opts) {
     peers: this.peers,
     chain: chain,
     network: network,
-    db: db.sublevel('burnie')
+    db: sublevel(opts.db, 'burnie')
   })
   filter.add(this.burnie)
 
