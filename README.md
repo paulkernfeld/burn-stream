@@ -1,5 +1,7 @@
 burn-stream is a world-writable append-only log using burned bitcoins.
 
+[![Build Status](https://travis-ci.org/paulkernfeld/burn-stream.svg)](https://travis-ci.org/paulkernfeld/burn-stream) [![npm](https://img.shields.io/npm/dt/burn-stream.svg)](https://www.npmjs.com/package/burn-stream)
+
 A burn stream is a series of special Bitcoin transactions that can be efficiently retrieved by any client, including a [simplified payment verification](https://en.bitcoin.it/wiki/Thin_Client_Security) client. Burn streams should be usable in many different applications. Anyone can write to a burn stream. Each message in a burn stream has a weight that quantifies how much money the writer burned in order to perform the write.
 
 This library presents a burn stream as a Javascript object stream. Here's an example message that this library might produce. It says, "okay" with a weight of 100,000 satoshis.
