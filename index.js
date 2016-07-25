@@ -1,5 +1,6 @@
 var Burnie = require('burnie')
 var debug = require('debug')('burn-stream')
+var _ = require('lodash')
 var through2 = require('through2')
 var assert = require('assert')
 var PeerGroup = require('bitcoin-net').PeerGroup
@@ -49,14 +50,15 @@ function BurnStream (opts) {
 
   var chain = new Blockchain(params.blockchain, sublevel(opts.db, 'chain'))
 
-  this.burnie = Burnie({
+  var burnieOpts = {
     address: config.burnAddress,
     from: config.checkpoint.height + 1,
     peers: this.peers,
     chain: chain,
     network: network,
     db: sublevel(opts.db, 'burnie')
-  })
+  }
+  this.burnie = Burnie(_.merge(burnieOpts, opts.burnie))
   filter.add(this.burnie)
 
   this.stream = through2.obj(function (burnieTx, enc, callback) {
