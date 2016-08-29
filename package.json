@@ -8,7 +8,7 @@
     "bitcoin-net": "^3.1.0",
     "bitcoin-util": "^2.0.1",
     "bitcoinjs-lib": "^2.2.0",
-    "blockchain-spv": "^1.3.4",
+    "blockchain-spv": "^2.1.0",
     "burnie": "^0.5.0",
     "debug": "^2.2.0",
     "subleveldown": "^2.1.0",
