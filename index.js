@@ -98,10 +98,9 @@ function BurnStream (opts) {
   this.burnie.stream.pipe(this.stream)
 
   this.peers.once('peer', function () {
-    chain.getLocator(function (err, locator) {
-      if (err) throw err
-      self.peers.createHeaderStream({ locator: locator }).pipe(chain.createWriteStream())
-    })
+    var headerStream = self.peers.createHeaderStream()
+    chain.createLocatorStream().pipe(headerStream)
+    headerStream.pipe(chain.createWriteStream())
   })
 
   bubbleError(self.peers, self, 'peers')
